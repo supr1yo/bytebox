@@ -3,10 +3,11 @@ import { createServer } from 'http';
 import cors from 'cors';
 import database from './database';
 // import multer from 'multer';
-import compression from 'compression';
+
 
 // Import routers
 import signup from './routes/user/signup';
+import login from './routes/user/login';
 
 
 const PORT = process.env.PORT;
@@ -17,12 +18,12 @@ const app = express();
 app.use(cors({
     credentials: true
 }));
-app.use(compression());
 app.use(express.json());
 
 const server = createServer(app);
 
 app.use('/', signup);
+app.use('/', login);
 
 
 database().then(() => {
