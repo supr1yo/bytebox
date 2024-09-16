@@ -9,7 +9,7 @@ if (!MONGODB_URI) {
  
 const database = async () =>{
   try {
-    await mongoose.connect(`${MONGODB_URI}/${DB_NAME}`, { bufferCommands: false }).then(() => {
+    await mongoose.connect(`${MONGODB_URI}/${DB_NAME}?retryWrites=true&w=majority`, { bufferCommands: false }).then(() => {
         console.log("Connected to MongoDB");
       });
   } catch (error) {
