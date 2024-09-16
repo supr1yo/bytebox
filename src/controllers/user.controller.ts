@@ -62,7 +62,7 @@ const login = async (req: Request, res: Response) => {
 
         if (!user) {
             return res.status(404).json({
-                message: 'User not found.'
+                message: 'Invalid user credentials.'
             });
         }
 
