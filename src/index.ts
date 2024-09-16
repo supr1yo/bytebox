@@ -1,13 +1,12 @@
-import compression from "compression";
+import express from 'express';
+import { createServer } from 'http';
+import cors from 'cors';
+import database from './services/database';
+// import multer from 'multer';
+import compression from 'compression';
 
-const express = require('express');
-const { createServer } = require('http');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const multer = require('multer');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
 const app = express();
 
 
@@ -15,15 +14,17 @@ const app = express();
 app.use(cors({
     credentials: true
 }));
-app.use(cookieParser());
 app.use(compression());
-app.use(bodyParser.json());
+app.use(express.json());
 
 const server = createServer(app);
 
 
 
-
-server.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-})
+database().then(() => {
+    server.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+    });
+}).catch((error: any) => {
+    console.log("MONGO db connection failed !!! ", error);
+});
