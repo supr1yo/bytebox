@@ -17,10 +17,13 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: [true, 'Password is required'],
-        select: false,
-    }
+    },
 }, {
     timestamps: true
 });
 
 export const User = model('User', userSchema);
+
+userSchema.methods.isPasswordCorrect = async function(password: string){
+    return await bcrypt.compare(password, this.password)
+}
