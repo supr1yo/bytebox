@@ -1,0 +1,30 @@
+{
+  "name": "bytebox",
+  "version": "1.0.0",
+  "description": "Online file storage",
+  "main": "src",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supr1yo/bytebox.git"
+  },
+  "keywords": [
+    "react",
+    "nodejs",
+    "express",
+    "mongodb",
+    "typescript"
+  ],
+  "author": "Supriyo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/supr1yo/bytebox/issues"
+  },
+  "homepage": "https://github.com/supr1yo/bytebox#readme",
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
+  }
+}
