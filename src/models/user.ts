@@ -1,29 +1,30 @@
-import { Schema, model } from 'mongoose';
-import bcrypt from "bcrypt";
+import {Schema, model} from 'mongoose';
 
-const userSchema = new Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
+const userSchema = new Schema(
+    {
+        username: {
+            type: String,
+            required: true,
+            unique: true,
+            lowercase: true,
+            trim: true, 
+            index: true
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+            lowecase: true,
+            trim: true, 
+        },
+        password: {
+            type: String,
+            required: [true, 'Password is required']
+        }
     },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-    },
-    password: {
-        type: String,
-        required: [true, 'Password is required'],
-    },
-}, {
-    timestamps: true
-});
+    {
+        timestamps: true
+    }
+);
 
-export const User = model('User', userSchema);
-
-userSchema.methods.isPasswordCorrect = async function(password: string){
-    return await bcrypt.compare(password, this.password)
-}
+export const User = model("User", userSchema)
