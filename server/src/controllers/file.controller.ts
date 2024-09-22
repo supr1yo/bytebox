@@ -1,10 +1,13 @@
 import { Request, Response } from "express";
 
-const uploadVideo = async (req: Request, res: Response) => {
-    return res.json(req.file);
+const uploadFile = async(req: Request, res: Response) => {
+    return res.json({
+        file: req.file
+    });
 }
 
 
+
 export {
-    uploadVideo
+    uploadFile
 }
