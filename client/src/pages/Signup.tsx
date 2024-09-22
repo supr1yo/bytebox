@@ -1,6 +1,10 @@
 import './signup.css'
 export default function SignupPage() {
 
+  const signup = async () => {
+    const response = await fetch()
+  }
+
   return (
     <>
       <div className="card">
