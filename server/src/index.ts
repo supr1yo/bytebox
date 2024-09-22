@@ -12,7 +12,8 @@ import signup from './routes/user/signup';
 import login from './routes/user/login';
 
 // Import file routers
-import image from './routes/file/image';
+import file from './routes/file/file';
+
 
 
 
@@ -30,7 +31,7 @@ const server = createServer(app);
 // Use the routes
 app.use('/', signup);
 app.use('/', login);
-app.use('/', image);
+app.use('/', file);
 
 
 database().then(() => {
