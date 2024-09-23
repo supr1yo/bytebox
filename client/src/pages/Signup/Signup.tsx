@@ -1,11 +1,10 @@
 import styles from './Signup.module.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-const navigate = useNavigate();
-
-
 
 export default function SignupPage() {
+  const navigate = useNavigate(); 
+
   // States for Fields
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -31,61 +30,56 @@ export default function SignupPage() {
       });
 
       if (!response.ok) {
-        throw new Error('Login failed! Please check your credentials.');
+        throw new Error('Signup failed! Please check your input.');
       }
 
-
-      // Redirect to Login page in 5 seconds after registering an account
+      // Redirect to Login page after successful registration
       setMessage('Account created successfully. Redirecting you to login page in 5 seconds.');
       setTimeout(() => {
-        navigate('http://localhost:5173/login');
+        navigate('/login');
       }, 5000);
     } catch (err) {
       setError((err as Error).message);
     }
   };
+
   return (
     <div className={styles.signupPageBody}>
       <div className={styles.card}>
-        <h2>
-        Sign up
-        </h2>
-          <form onSubmit={handleSignup}>
-            <input 
+        <h2>Sign up</h2>
+        <form onSubmit={handleSignup}>
+          <input 
             type="text" 
             placeholder="Username" 
-            name="username" 
-            id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            required/>
+            required
+          />
 
-            <input
+          <input
             type="email"
             placeholder="Email"
-            name="email"
-            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required/>
+            required
+          />
 
-            <input 
+          <input 
             type="password"
             placeholder='Password'
-            name="password"
-            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required/>
+            required
+          />
 
-            <button type="submit">Sign up</button>
-          </form>
-          {message && <p className={styles.message}>{message}</p>}
-          {error && <p className={styles.error_message}>{error}</p>}
-          <p>
+          <button type="submit">Sign up</button>
+        </form>
+        {message && <p className={styles.message}>{message}</p>}
+        {error && <p className={styles.error_message}>{error}</p>}
+        <p>
           Already have an account? <a href="/login">Log in.</a>
-          </p>
+        </p>
       </div>
     </div>
-  )
+  );
 }

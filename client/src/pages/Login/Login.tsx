@@ -1,20 +1,17 @@
 import styles from './Login.module.css';
 import { useEffect, useState } from 'react';
-import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
-const navigate = useNavigate();
-
-const cookies = new Cookies(null, { path: '/' });
+import Cookies from 'universal-cookie';
 
 export default function LoginPage() {
+  const navigate = useNavigate(); 
+  const cookies = new Cookies(null, { path: '/' });
+
   // States for Fields
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-
-  // Error message
+  // Error Message
   const [error, setError] = useState<string | null>(null);
-
-
 
   // Get token from cookies and validate with the server
   useEffect(() => {
@@ -30,12 +27,12 @@ export default function LoginPage() {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ token: clientToken})
+            body: JSON.stringify({ token: clientToken })
           });
 
           if (response.ok) {
             // If valid, redirect to dashboard
-            navigate('http://localhost:5173/dashboard');
+            navigate('/dashboard');
           } else {
             // Remove the malformed token
             cookies.remove('BYTEBOX_TOKEN');
@@ -47,7 +44,7 @@ export default function LoginPage() {
 
       validateToken();
     }
-  }, []);
+  }, []); 
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -72,7 +69,7 @@ export default function LoginPage() {
       cookies.set('BYTEBOX_TOKEN', token);
 
       // Redirect to dashboard after login
-      navigate('http://localhost:5173/dashboard');
+      navigate('/dashboard'); // Use relative path
     } catch (err) {
       setError((err as Error).message);
     }
@@ -80,33 +77,33 @@ export default function LoginPage() {
 
   return (
     <div className={styles.loginPageBody}>
-    <div className={styles.card}>
-      <h2>Login</h2>
+      <div className={styles.card}>
+        <h2>Login</h2>
 
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
+        <form onSubmit={handleLogin}>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
 
-      {error && <p className={styles.error_message}>{error}</p>}
+        {error && <p className={styles.error_message}>{error}</p>}
 
-      <p>
-        New user? <a href="/signup">Create an account</a>.
-      </p>
-    </div>
+        <p>
+          New user? <a href="/signup">Create an account</a>.
+        </p>
+      </div>
     </div>
   );
 }
