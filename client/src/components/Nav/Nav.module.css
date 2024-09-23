@@ -1,23 +1,37 @@
+/* Navigation container */
+.nav {
+  display: flex;
+  justify-content: flex-start; 
+  padding: 0 20px;
+  background-color: rgb(27, 99, 207);
+}
+
+/* Align the list items to the right */
 .nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-  }
-  
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px; 
+}
+
+/* List items */
 .nav li {
-    float: left;
-  }
-  
-  .nav  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-  .nav  li a:hover {
-    background-color: #111;
-  }
+  display: inline; 
+  position: relative; 
+}
+
+/* Anchor styling */
+.nav li a {
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 16px 18px;
+  text-decoration: none;
+  position: relative;
+}
+
+.nav li a:hover {
+  text-decoration: underline;
+}
+
