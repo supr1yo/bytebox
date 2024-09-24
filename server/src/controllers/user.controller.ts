@@ -14,7 +14,7 @@ interface LoginBody {
     password: string;
 }
 
-const register = async (req: Request, res: Response) => {
+const createUser = async (req: Request, res: Response) => {
     try {
         const { email, password, username }: RegisterBody = req.body;
 
@@ -98,4 +98,4 @@ const login = async (req: Request, res: Response) => {
     }
 }
 
-export { register, login };
+export { createUser, login };
