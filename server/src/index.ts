@@ -10,7 +10,7 @@ import database from './database';
 // Import user routers
 import signup from './routes/user/signup';
 import login from './routes/user/login';
-
+import validateUser from './routes/user/validate';
 // Import file routers
 import file from './routes/file/file';
 
@@ -32,7 +32,7 @@ const server = createServer(app);
 app.use('/', signup);
 app.use('/', login);
 app.use('/', file);
-
+app.use('/', validateUser);
 
 database().then(() => {
     server.listen(PORT, () => {
