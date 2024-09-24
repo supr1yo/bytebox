@@ -1,4 +1,4 @@
-/* Scope the body style to the home page */
+/* Container styling */
 .loginPageBody {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #fcfcfc;
@@ -19,19 +19,18 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-/* Scoped h2 styling */
+
 .card h2 {
     color: rgb(27, 99, 207);
     margin-bottom: 20px;
 }
 
-/* Scoped form styling */
+
 form {
     display: flex;
     flex-direction: column;
 }
 
-/* Scoped input styling */
 .card input {
     margin-bottom: 15px;
     padding: 8px;
@@ -39,7 +38,7 @@ form {
     border-radius: 4px;
 }
 
-/* Scoped button styling */
+
 .card button {
     background-color: rgb(94, 144, 219);
     color: rgb(255, 255, 255);
@@ -54,7 +53,7 @@ form {
     background-color: rgb(48, 102, 182);
 }
 
-/* Scoped anchor link styling */
+
 .card p a {
     text-decoration: none;
     color: rgb(27, 99, 207);
@@ -68,7 +67,7 @@ form {
     color: rgb(27, 99, 207);
 }
 
-/* Error message styling */
+/* Error message */
 .error_message {
     color: rgb(199, 34, 34);
     font-size: 16px;
