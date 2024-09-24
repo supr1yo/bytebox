@@ -10,6 +10,10 @@ export default function LoginPage() {
   // States for Fields
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+
+  // Logged in or not
+  const [loggedIn, isLoggedIn] = useState<boolean>(false);
+
   // Error Message
   const [error, setError] = useState<string | null>(null);
 
@@ -25,14 +29,14 @@ export default function LoginPage() {
             mode: 'cors',
             headers: {
               'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ token: clientToken })
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${clientToken}`
+            }
           });
 
           if (response.ok) {
             // If valid, redirect to dashboard
-            navigate('/dashboard');
+            isLoggedIn(true);
           } else {
             // Remove the malformed token
             cookies.remove('BYTEBOX_TOKEN');
@@ -65,45 +69,59 @@ export default function LoginPage() {
         throw new Error('Login failed! Please check your credentials.');
       }
 
+      // Get token from response and set as cookie
       const { token } = await response.json();
       cookies.set('BYTEBOX_TOKEN', token);
 
       // Redirect to dashboard after login
-      navigate('/dashboard'); // Use relative path
+      navigate('/dashboard');
     } catch (err) {
       setError((err as Error).message);
     }
   };
 
-  return (
-    <div className={styles.loginPageBody}>
-      <div className={styles.card}>
-        <h2>Login</h2>
+  if (!loggedIn) {
+    return (
+      <div className={styles.loginPageBody}>
+        <div className={styles.card}>
+          <h2>Login</h2>
 
-        <form onSubmit={handleLogin}>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button type="submit">Login</button>
-        </form>
+          <form onSubmit={handleLogin}>
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <button type="submit">Login</button>
+          </form>
 
-        {error && <p className={styles.error_message}>{error}</p>}
+          {error && <p className={styles.error_message}>{error}</p>}
 
-        <p>
-          New user? <a href="/signup">Create an account</a>.
-        </p>
+          <p>
+            New user? <a href="/signup">Create an account</a>.
+          </p>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className={styles.loginPageBody}>
+        <div className={styles.card}>
+          <h2>You are already logged in</h2>
+          <p>
+            Go to your <a href="/dashboard">dashboard</a>.
+          </p>
+        </div>
+      </div>
+    );
+  }
 }
